@@ -1,0 +1,127 @@
+import React from 'react';
+import './App.css';
+// import { Button, Card, ProgressBar } from 'react-bootstrap';
+
+const API_URL = "http://localhost:" + (process.env.PORT || 8080) + "/";
+const API_SEARCH_URL = API_URL + "search/";
+
+//Defines product details
+interface Details {
+  brand: string,
+  name: string,
+  retailPrice: number,
+  highestBid: number,
+  releaseDate: number,
+  thumbnail_url: string,
+  url: string
+};
+
+//Defines the component state
+interface AppState {
+  //Local
+  input: string,
+  isLoading: boolean,
+  products: Details[]
+}
+
+export default class App extends React.Component<{}, AppState>  {
+  constructor(props : AppState) {
+    super(props);
+
+    this.state = {
+      input: "",
+      isLoading: false,
+      products: []
+    }
+  }
+
+  handleSubmit = (e : any) => {
+    e.preventDefault();
+    const input = this.state.input;
+    this.setState({
+      input: "",
+      isLoading: true,
+    });
+
+    query(input).then(res => {
+      this.setState({
+        products: res,
+        isLoading: false
+      });
+    });
+  }
+
+  handleInput = (e : any) => {
+    e.preventDefault();
+    this.setState({input: e.target.value});
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" id="search" name= "search" value={this.state.input} placeholder="Search" onChange={this.handleInput}/>
+          {this.state.isLoading ? <div className="icon_animated"/> : <div className="icon"/>}
+        </form>
+      </div>
+    );
+  }
+}
+
+/**
+ * Calls API requesting information on query
+ * @param squery name of item to search for
+ */
+const query = async (squery: string) => {
+  let products : Details[] = [];
+
+  await fetch(API_SEARCH_URL + "?q=" + squery)
+    .then(res => res.json())
+    .then(res => products = res)
+    .catch(err => console.log(err))
+
+  return products;
+}
+
+// const renderCard = (details: Details) : JSX.Element => {
+//   let profit = details.highestBid - details.retailPrice;
+//   let profitPercentage = Math.floor((profit / details.retailPrice)*100);
+
+//   let Cardvariant = (profit > 0 ? 'primary' : 'danger');
+//   let progressVariant = (profit > 0 ? 'success' : 'dark');
+
+//   const handleDetailsClick = () => {window.open('https://www.google.com')};
+//   const handleGoToClick = () => {window.open(details.url, '_blank', 'noreferrer')};
+
+//   return (
+//     <Card
+//     border='dark'
+//     bg={Cardvariant}
+//     text='white'
+//     style={{ width: '18rem'}}
+//     >
+//     <Card.Header className="text-center"> <b>{details.name}</b></Card.Header>
+
+//     <Card.Body>
+//       <Card.Title className="text-center">
+//           Cost: ${details.retailPrice} | Price: ${details.highestBid}
+//           <br />
+//           Estimated Profit: {profit > 0 ? '$' + profit : '-$' + Math.abs(profit)}
+//       </Card.Title>
+
+//       <ProgressBar variant={progressVariant} now={Math.abs(profitPercentage)} label={`${profitPercentage}%`} />
+//       <br />
+
+//       <Card.Text className="text-center">
+//       <Button style={{width: '7rem'}} variant="light" className="text-center" onClick={handleDetailsClick}><b>Details</b></Button>
+//       |
+//       <Button style={{width: '7rem'}} variant="light" className="text-center" onClick={handleGoToClick}><b>GoTo</b></Button>
+//       </Card.Text>
+//     </Card.Body>
+
+//     <Card.Footer className="text-center">
+//       <small style={{color:"white"}}>Release Date: {details.releaseDate}</small>
+//     </Card.Footer>
+//   </Card>
+//   );
+// }

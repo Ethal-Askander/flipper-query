@@ -1,13 +1,68 @@
 body {
+  align-items: center;
+  display: flex;
+  font-family: 'Inter UI', sans-serif;
+  font-size: 14px;
+  height: 100vh;
+  justify-content: center;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+input {
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  width: 200px;
+  height: 30px;
+  outline: none !important;
+  position: relative;
+  border-bottom: solid black;
+  display: block;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  min-width: 246px;
+  min-height: 46px;
+  transition: box-shadow .3s;
+  box-shadow: 2px 2px 4px #AA0000;
+}
+
+.icon {
+  background-color: black;
+  border: 0;
+  display: flex;
+  width: 22px;
+  height: 22px;
+  margin: 0.8em;
+  border-radius: 50%;
+}
+
+.icon_animated {
+  background-color: black;
+  border: 0;
+  display: flex;
+  width: 22px;
+  height: 22px;
+  margin: 0.8em;
+  border-radius: 50%;
+  animation: loading 2s ease-out infinite;
+}
+
+@keyframes loading {
+  0%, 50%, 100% {
+		transform: scale(1);
+		filter: blur(0px);
+	}
+	25% {
+		transform: scale(0.6);
+    filter: blur(3px);
+    background-color: red;
+	}
+	75% {
+		filter: blur(3px);
+    transform: scale(1.4);
+    background-color: blue;
+	}
 }
