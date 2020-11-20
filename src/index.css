@@ -3,7 +3,6 @@ body {
   display: flex;
   font-family: 'Inter UI', sans-serif;
   font-size: 14px;
-  height: 100vh;
   justify-content: center;
   margin: 0;
 }
@@ -65,4 +64,38 @@ form {
     transform: scale(1.4);
     background-color: blue;
 	}
+}
+
+h1 {
+  /*TODO: get a better style for the title */
+  /* font: bold;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-style: italic;
+  align-self: center; */
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  font-size: 8vw;
+  font-weight: 800;
+  background-color: red;
+	color: #fff;
+	display: block;
+	padding: .5em;
+}
+
+/*TODO: get a better style for the title */
+h1:nth-child(2) {
+	position: absolute;
+	background-color: yellow;
+	color: #000;
+	clip-path: inset(-1% -1% 50% -1%);
+}
+
+/*TODO: get a better style for the title */
+.title {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
 }
