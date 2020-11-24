@@ -63,7 +63,6 @@ export default class App extends React.Component<{}, AppState>  {
       <div>
         <div className="title">
           <h1>Shoe Flipper</h1>
-          <h1>Shoe Flipper</h1>
         </div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" id="search" name= "search" value={this.state.input} placeholder="Search" onChange={this.handleInput}/>
