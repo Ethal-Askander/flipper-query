@@ -1,10 +1,16 @@
 import React from 'react';
 import './App.css';
-import { Button, Card, CardDeck, ProgressBar } from 'react-bootstrap';
+import { Button, Card, CardDeck, Dropdown, ProgressBar } from 'react-bootstrap';
 
 //API connection
 const API_URL = "http://localhost:" + (process.env.PORT || 8080) + "/";
 const API_SEARCH_URL = API_URL + "search/";
+
+//Market places
+const markets : string[] = ['StockX', 'Goat'];
+
+//Currencies
+const currencies : string[] = ['AUD', 'USD'];
 
 //Defines product details
 interface Details {
@@ -19,10 +25,18 @@ interface Details {
 
 //Defines the component state
 interface AppState {
-  //Local
+  // Search box
   input: string,
   isLoading: boolean,
+
+  // Search preferences
+  marketPlace: string,
+  currency: string,
+
+  // Products
   products: Details[]
+  page: number,
+  maxPages: number
 }
 
 export default class App extends React.Component<{}, AppState>  {
@@ -30,9 +44,15 @@ export default class App extends React.Component<{}, AppState>  {
     super(props);
 
     this.state = {
-      input: "",
+      input: '',
       isLoading: false,
-      products: []
+      
+      marketPlace: 'StockX',
+      currency: 'AUD',
+
+      products: [],
+      page: 1,
+      maxPages: 1
     }
   }
 
@@ -59,15 +79,63 @@ export default class App extends React.Component<{}, AppState>  {
   }
 
   render() {
+
+    const dropDownPages = [];
+    for (let i = 1; i <= this.state.maxPages; i++) {
+      if (this.state.page != i)
+        dropDownPages.push(<Dropdown.Item onClick={() => this.setState({page: i})} style={{width:'20px'}}>{i}</Dropdown.Item>)
+    }
+
     return (
       <div>
         <div className="title">
           <h1>Shoe Flipper</h1>
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" id="search" name= "search" value={this.state.input} placeholder="Search" onChange={this.handleInput}/>
-          {this.state.isLoading ? <div className="icon_animated"/> : <div className="icon"/>}
-        </form>
+
+        <div className="contents-table">
+          {/* Search box */}
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" id="search" name= "search" value={this.state.input} placeholder="Search" onChange={this.handleInput}/>
+            {this.state.isLoading ? <div className="icon_animated"/> : <div className="icon"/>}
+          </form>
+
+          {/* Market place dropdown */}
+          <Dropdown>
+            <Dropdown.Toggle variant="success" style={{width: '100px', height:'50px'}}>
+              {this.state.marketPlace}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {markets.map(market => {
+                return this.state.marketPlace === market ? null : <Dropdown.Item onClick={() => this.setState({marketPlace: market})} style={{width:'140px'}}>{market}</Dropdown.Item>
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* Currencies dropdown */}
+          <Dropdown>
+            <Dropdown.Toggle variant="success" style={{width: '100px', height:'50px'}}>
+              {this.state.currency}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {currencies.map(currency => {
+                return this.state.currency === currency ? null : <Dropdown.Item onClick={() => this.setState({currency: currency})} style={{width:'140px'}}>{currency}</Dropdown.Item>
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Dropdown>
+            <Dropdown.Toggle variant="info" style={{width: '50px', height:'50px'}}>
+              {this.state.page}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {dropDownPages}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
         <div>
           {renderCardDeck(this.state.products)}
         </div>

@@ -1,3 +1,4 @@
+/* Whole page */
 body {
   align-items: center;
   display: flex;
@@ -7,6 +8,34 @@ body {
   margin: 0;
 }
 
+/* Title */
+.title > h1 {
+  display: flex;
+  position: relative;
+  font-size: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: underline overline;
+}
+
+.title {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contents table */
+.contents-table {
+  display: table;
+  margin: 10px;
+}
+
+.contents-table * {
+  float: left; /* Float the buttons side by side */
+  margin-left: 10px;
+}
+
+/* Search bar */
 input {
   background: transparent;
   border: 0;
@@ -23,7 +52,7 @@ form {
   display: flex;
   align-items: center;
   min-width: 246px;
-  min-height: 46px;
+  height: 50px;
   transition: box-shadow .3s;
   box-shadow: 2px 2px 4px #AA0000;
 }
@@ -64,20 +93,4 @@ form {
     transform: scale(1.4);
     background-color: blue;
 	}
-}
-
-h1 {
-  display: flex;
-  position: relative;
-  font-size: large;
-  font-family: 'Courier New', Courier, monospace;
-  text-decoration: underline overline;
-}
-
-/*TODO: get a better style for the title */
-.title {
-  display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
 }
