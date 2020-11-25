@@ -26,13 +26,31 @@ body {
 
 /* Contents table */
 .contents-table {
-  display: table;
-  margin: 10px;
+  display: flex;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 1416px;
 }
 
-.contents-table * {
-  float: left; /* Float the buttons side by side */
-  margin-left: 10px;
+.contents-table *:first-child {
+  float: left;
+}
+
+.contents-table *:nth-child(2) {
+  float: left;
+  margin-left: 20px;
+}
+
+.contents-table *:nth-child(3) {
+  float: left;
+  margin-left: 20px;
+}
+
+.contents-table *:last-child {
+  float: right;
+  margin-left: auto;
 }
 
 /* Search bar */
@@ -93,4 +111,17 @@ form {
     transform: scale(1.4);
     background-color: blue;
 	}
+}
+
+/* Shoe box */
+.shoe-box {
+  background-color: whitesmoke;
+  border: 0;
+  display: flex;
+  width: 1516px;
+  height: 2432px;
+  border-radius: 2%;
+
+  align-items: right;
+  justify-content: right;
 }

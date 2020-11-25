@@ -7,10 +7,10 @@ const API_URL = "http://localhost:" + (process.env.PORT || 8080) + "/";
 const API_SEARCH_URL = API_URL + "search/";
 
 //Market places
-const markets : string[] = ['StockX', 'Goat'];
+const markets : string[] = ['StockX'];
 
 //Currencies
-const currencies : string[] = ['AUD', 'USD'];
+const currencies : string[] = ['USD'];
 
 //Defines product details
 interface Details {
@@ -47,8 +47,8 @@ export default class App extends React.Component<{}, AppState>  {
       input: '',
       isLoading: false,
       
-      marketPlace: 'StockX',
-      currency: 'AUD',
+      marketPlace: markets[0],
+      currency: currencies[0],
 
       products: [],
       page: 1,
@@ -82,7 +82,7 @@ export default class App extends React.Component<{}, AppState>  {
 
     const dropDownPages = [];
     for (let i = 1; i <= this.state.maxPages; i++) {
-      if (this.state.page != i)
+      if (this.state.page !== i)
         dropDownPages.push(<Dropdown.Item onClick={() => this.setState({page: i})} style={{width:'20px'}}>{i}</Dropdown.Item>)
     }
 
@@ -101,7 +101,7 @@ export default class App extends React.Component<{}, AppState>  {
 
           {/* Market place dropdown */}
           <Dropdown>
-            <Dropdown.Toggle variant="success" style={{width: '100px', height:'50px'}}>
+            <Dropdown.Toggle variant="success" style={{width: '100px', height:'50px'}} disabled={markets.length <= 1}>
               {this.state.marketPlace}
             </Dropdown.Toggle>
 
@@ -114,7 +114,7 @@ export default class App extends React.Component<{}, AppState>  {
 
           {/* Currencies dropdown */}
           <Dropdown>
-            <Dropdown.Toggle variant="success" style={{width: '100px', height:'50px'}}>
+            <Dropdown.Toggle variant="success" style={{width: '100px', height:'50px'}} disabled={currencies.length <= 1}>
               {this.state.currency}
             </Dropdown.Toggle>
 
@@ -125,8 +125,9 @@ export default class App extends React.Component<{}, AppState>  {
             </Dropdown.Menu>
           </Dropdown>
 
+          {/* Page dropdown */}
           <Dropdown>
-            <Dropdown.Toggle variant="info" style={{width: '50px', height:'50px'}}>
+            <Dropdown.Toggle variant="info" style={{width: '50px', height:'50px'}} disabled={dropDownPages.length < 1}>
               {this.state.page}
             </Dropdown.Toggle>
 
@@ -136,7 +137,7 @@ export default class App extends React.Component<{}, AppState>  {
           </Dropdown>
         </div>
 
-        <div>
+        <div className="shoe-box">
           {renderCardDeck(this.state.products)}
         </div>
       </div>
@@ -183,7 +184,7 @@ const renderCard = (details: Details) : JSX.Element => {
     border='dark'
     bg={Cardvariant}
     text='white'
-    style={{ width: '288px', margin: '16px'}}
+    style={{ width: '288px'}}
     >
     <Card.Header className="text-center"> <b>{details.name}</b></Card.Header>
     <Card.Img variant="top" src={details.thumbnail_url} />
@@ -221,6 +222,7 @@ const renderCardDeck = (detailsList: Details[]) : JSX.Element => {
   return (
     <CardDeck
       key="CardDeck"
+      style={{justifyContent: 'center'}}
     >
       {detailsList.map((details : Details) => <div>{renderCard(details)}</div>)}
     </CardDeck>

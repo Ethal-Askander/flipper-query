@@ -1,6 +1,6 @@
 const express = require('express');
-const app = express();
-const cors = require('cors');   //To enable Cross-origin resource sharing (allows react to call this)
+const app = express();          // For API
+const cors = require('cors');   // To enable Cross-origin resource sharing (allows react to call this)
 
 app.use(cors())
 
