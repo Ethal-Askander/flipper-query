@@ -60,10 +60,10 @@ input {
   font-size: 20px;
   width: 200px;
   height: 30px;
-  outline: none !important;
+  /* outline: none !important;
   position: relative;
   border-bottom: solid black;
-  display: block;
+  display: block; */
 }
 
 form {
@@ -71,8 +71,9 @@ form {
   align-items: center;
   min-width: 246px;
   height: 50px;
-  transition: box-shadow .3s;
-  box-shadow: 2px 2px 4px #AA0000;
+  background-color: whitesmoke;
+  box-shadow: 1px 1px 2px black;
+  border-radius: 5px;
 }
 
 .icon {
@@ -116,10 +117,11 @@ form {
 /* Shoe box */
 .shoe-box {
   background-color: whitesmoke;
+  filter: drop-shadow(0px 12px 42px rgba(0, 0, 0, 0.161));
   border: 0;
   display: flex;
   width: 1516px;
-  height: 2432px;
+  height: 768px;
   border-radius: 2%;
 
   align-items: right;
