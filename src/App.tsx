@@ -95,7 +95,7 @@ export default class App extends React.Component<{}, AppState>  {
         <div className="contents-table">
           {/* Search box */}
           <form onSubmit={this.handleSubmit}>
-            <input type="text" id="search" name= "search" value={this.state.input} placeholder="Search" onChange={this.handleInput}/>
+            <input style={{fontSize:'20px'}} type="text" id="search" name= "search" value={this.state.input} placeholder="Search" onChange={this.handleInput}/>
             {this.state.isLoading ? <div className="icon_animated"/> : <div className="icon"/>}
           </form>
 
@@ -137,6 +137,7 @@ export default class App extends React.Component<{}, AppState>  {
           </Dropdown>
         </div>
 
+        {/* Rectangle holding shoes */}
         <div className="shoe-box">
           {renderCardDeck(this.state.products)}
         </div>
