@@ -1,10 +1,13 @@
-### Install the following
-- npm install express
-- npm install stockx-api
+# Flipper-Query
+Flipper-Query is an api that allows the user to obtain StockX resale product information.
 
-### To run
-- node index.js
+### To install everything
+- npm i
 
-### To have refresh after each change
-- npm install nodemon
-- nodemon index.js
+### To run dev mode (refresh after each change)
+- npm i nodemon
+- npm run dev <u>or</u> nodemon index.js
+
+### To compile into an executable
+- npm install pkg
+- pkg .

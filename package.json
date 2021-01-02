@@ -1,5 +1,5 @@
 {
-  "name": "Flipper-Query",
+  "name": "flipper-query",
   "version": "1.0.0",
   "description": "Provides an api to query product information",
   "main": "index.js",
