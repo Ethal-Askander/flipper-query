@@ -17,15 +17,17 @@
     </form>
 </div>
 
+<p id="products" value="products" />
+
 <script>
-    function searchStock() {
-        // const input = document.getElementById("search").value;
-        // let form = this;
-        // form.action = "/search/?q=" + input;
-        // form.submit;
+    getProducts("Jordan");
+    function getProducts(query) {
+        fetch("http://localhost:8080/search?q=" + query, {method: 'GET'})
+            .then(response => response.json())
+            .then(data => document.getElementById('products').innerHTML = JSON.stringify(data))
+            .catch(err => console.log(err));
     }
 </script>
-
 
 </body>
 </html>

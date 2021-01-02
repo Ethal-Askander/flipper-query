@@ -38,6 +38,7 @@ async function scrapeProducts(query, number = undefined) {
 }
 
 const path = require('path');   // For getting local files
+app.set('index', path.join(__dirname, 'build', 'index.html'));
 app.use(express.static(path.join(__dirname, 'build')));
 //Front page
 app.get('/', function (req, res) {
@@ -61,8 +62,12 @@ app.get('/search', function (req, res) {
     const query = req.query.q;
     const number = req.query.n;
     scrapeProducts(query, number).then(out => {
+        res.status(200);
         res.send(out);
-    }).catch(err => res.send("err"));
+    }).catch(err => {
+        res.status(403);
+        res.send(err);
+    });
 });
 
 // Will use either the environment variable PORT or other
