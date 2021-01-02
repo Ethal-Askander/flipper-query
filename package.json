@@ -1,0 +1,24 @@
+{
+  "name": "Flipper-Query",
+  "version": "1.0.0",
+  "description": "Provides an api to query product information",
+  "main": "index.js",
+  "bin": "index.js",
+  "pkg": {
+    "assets": ["build/*", "images/*"]
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon",
+    "build": "pkg ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "open": "^7.3.0",
+    "stockx-api": "^1.0.9"
+  }
+}
