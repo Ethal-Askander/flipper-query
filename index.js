@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();          // For API
 const cors = require('cors');   // To enable Cross-origin resource sharing (allows react to call this)
+const path = require('path');   // For getting local files
 
+app.use(express.static(path.join(__dirname, 'build'))); // Links html and css
 app.use(cors())
 
 const StockXAPI = require('stockx-api');
@@ -37,9 +39,6 @@ async function scrapeProducts(query, number = undefined) {
     return res;
 }
 
-const path = require('path');   // For getting local files
-app.set('index', path.join(__dirname, 'build', 'index.html'));
-app.use(express.static(path.join(__dirname, 'build')));
 //Front page
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
@@ -63,7 +62,16 @@ app.get('/search', function (req, res) {
     const number = req.query.n;
     scrapeProducts(query, number).then(out => {
         res.status(200);
-        res.send(out);
+        // res.send(out);
+        const options = {
+            headers: {
+                'products': JSON.stringify(out)
+            }
+          };
+        res.sendFile(path.join(__dirname, 'build', 'index.html'), options, (err) => {
+            res.status(403);
+            res.send(err);
+        })
     }).catch(err => {
         res.status(403);
         res.send(err);

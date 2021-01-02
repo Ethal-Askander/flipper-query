@@ -20,13 +20,25 @@
 <p id="products" value="products" />
 
 <script>
-    getProducts("Jordan");
-    function getProducts(query) {
-        fetch("http://localhost:8080/search?q=" + query, {method: 'GET'})
-            .then(response => response.json())
-            .then(data => document.getElementById('products').innerHTML = JSON.stringify(data))
-            .catch(err => console.log(err));
+    // Attempt to get response headers
+    var req = new XMLHttpRequest();
+    req.open('GET', document.location, false);
+    req.send(null);
+    
+    // Get the products from search
+    const products = req.getResponseHeader('products');
+    if (products) {
+        document.getElementById('products').innerHTML = products;
     }
+
+    // Alternatively, make a fetch request to the backend
+    // getProducts("Jordan");
+    // function getProducts(query) {
+    //     fetch("http://localhost:8080/search?q=" + query, {method: 'GET'})
+    //         .then(response => response.json())
+    //         .then(data => document.getElementById('products').innerHTML = JSON.stringify(data))
+    //         .catch(err => console.log(err));
+    // }
 </script>
 
 </body>

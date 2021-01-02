@@ -10,4 +10,5 @@ Flipper-Query is an api that allows the user to obtain StockX resale product inf
 
 ### To compile into an executable
 - npm install pkg
-- pkg .
+- <b>For all platforms:</b> pkg .
+- <b>For all windows:</b> pkg -t node12-win-x64 .
