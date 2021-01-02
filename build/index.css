@@ -1,0 +1,18 @@
+body {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-family: 'Inter UI', sans-serif;
+    font-size: 14px;
+}
+
+.title {
+    display: flex;
+    position: relative;
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: underline overline;
+}
