@@ -16,3 +16,21 @@ body {
     font-family: 'Courier New', Courier, monospace;
     text-decoration: underline overline;
 }
+
+.search-bar {
+    background: transparent;
+    border: 0;
+    font-size: 20px;
+    width: 200px;
+    height: 30px;
+
+    outline: none !important;
+    position: relative;
+    border-bottom: solid 3px black;
+    display: block;
+}
+
+.search-bar:focus {
+    border-bottom: solid 3px blue;
+    transition: all 200ms linear;
+}
