@@ -14,8 +14,26 @@
 <div>
     <form action="/search" method="GET">
         <input class="search-bar" type="text" name="q" id="search" placeholder="Jordan 1..." />
-        <img src="../images/test.jpg" alt="Loading Icon" />
     </form>
+</div>
+
+<div class="card-container">
+    <div class="card">
+        <b>Jordan 1 Retro High Dark Mocha</b>
+        <img 
+            width="80%"
+            height="50%"    
+            src="https://stockx.imgix.net/images/Air-Jordan-1-Retro-High-Dark-Mocha-2-Product.jpg?fit=fill&bg=FFFFFF&w=300&h=214&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1608736454"
+        />
+        <p>Retail cost: $350 <br />
+        Estimated sale price: $700 <br />
+        Estimated total additional costs: $210 <br />
+        Profit: $140 <br />
+        </p>
+
+        <button>Go to</button>
+        
+    </div>
 </div>
 
 <p id="products" value="products" />
@@ -27,19 +45,15 @@
     req.send(null);
     
     // Get the products from search
-    const products = req.getResponseHeader('products');
+    let products = req.getResponseHeader('products');
     if (products) {
-        document.getElementById('products').innerHTML = products;
+        // Testing, to see how to parse and get information from a product.
+        products = JSON.parse(products);
+        for (product of products) {
+            console.log(product);
+        }
+        document.getElementById('products').innerHTML = `<b> ${products[0].name} </b>`;
     }
-
-    // Alternatively, make a fetch request to the backend
-    // getProducts("Jordan");
-    // function getProducts(query) {
-    //     fetch("http://localhost:8080/search?q=" + query, {method: 'GET'})
-    //         .then(response => response.json())
-    //         .then(data => document.getElementById('products').innerHTML = JSON.stringify(data))
-    //         .catch(err => console.log(err));
-    // }
 </script>
 
 </body>

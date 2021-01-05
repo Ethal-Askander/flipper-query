@@ -34,3 +34,30 @@ body {
     border-bottom: solid 3px blue;
     transition: all 200ms linear;
 }
+
+/* Product Cards */
+.card {
+    height: 300px;
+    width: 250px;
+    position: relative;
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+    border-radius: 10px;
+}
+
+.card-container {
+    display: flex;
+    margin-top: 20px;
+    height: 700px;
+    width: 1450px;
+
+    box-shadow:  15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+    border-radius: 30px;
+
+    overflow-y: auto;
+}
