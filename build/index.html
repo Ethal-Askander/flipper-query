@@ -17,26 +17,7 @@
     </form>
 </div>
 
-<p id="products" value="products" />
-
-<div class="card-container">
-    <div class="card">
-        <b>Jordan 1 Retro High Dark Mocha</b>
-        <img 
-            width="80%"
-            height="50%"    
-            src="https://stockx.imgix.net/images/Air-Jordan-1-Retro-High-Dark-Mocha-2-Product.jpg?fit=fill&bg=FFFFFF&w=300&h=214&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1608736454"
-        />
-        <p>Retail cost: $350 <br />
-        Estimated sale price: $700 <br />
-        Estimated total additional costs: $210 <br />
-        Profit: $140 <br />
-        </p>
-
-        <button onclick="openWindow('http://www.google.com')">Go to</button>
-        
-    </div>
-</div>
+<div id="container" class="card-container" />
 
 <script>
     const shipping = 30;
@@ -71,7 +52,7 @@
 
         return (
             `
-            <div class="card">
+            <div class="card ${profit > 0 ? "pos" : "neg"}">
                 <img
                     width="80%"
                     height="50%"
@@ -101,10 +82,9 @@
         for (product of products) {
             console.log(product);
         }
-        document.getElementById('products').innerHTML = products.map(product => {
+        document.getElementById('container').innerHTML = products.map(product => {
             return createCard(product);
         });
-        //`<b> ${products[0].name} </b>`;
     }
 </script>
 
