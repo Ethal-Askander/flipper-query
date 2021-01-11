@@ -5,7 +5,10 @@
   "main": "index.js",
   "bin": "index.js",
   "pkg": {
-    "assets": ["build/*", "images/*"]
+    "assets": [
+      "build/*",
+      "images/*"
+    ]
   },
   "scripts": {
     "start": "node index.js",
@@ -18,6 +21,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "nodemon": "^2.0.7",
     "open": "^7.3.0",
     "stockx-api": "^1.0.9"
   }

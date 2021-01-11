@@ -17,6 +17,8 @@
     </form>
 </div>
 
+<p id="products" value="products" />
+
 <div class="card-container">
     <div class="card">
         <b>Jordan 1 Retro High Dark Mocha</b>
@@ -31,14 +33,61 @@
         Profit: $140 <br />
         </p>
 
-        <button>Go to</button>
+        <button onclick="openWindow('http://www.google.com')">Go to</button>
         
     </div>
 </div>
 
-<p id="products" value="products" />
-
 <script>
+    const shipping = 30;
+    const commission = 0.12;
+
+        /**
+     * @param url: URL to open.
+     * Opens the given url.
+     */
+     const openWindow = (url) => {
+        window.open(url);
+    }
+
+    /**
+     * @param details: product details used to display information.
+     * Creates a html product card to display.
+     */
+    const createCard = (details) => {
+        //Calculating values
+        const cost = Math.round((
+            (details.retailPrice || 0) + 
+            (shipping || 0) + 
+            (details.highestBid ? details.highestBid*commission : 0) + 
+            Number.EPSILON) * 100)
+            / 100; // Rounds to 2dp with 5 going up.
+        const profit = Math.round(((details.highestBid || 0) - cost + Number.EPSILON) * 100) / 100;
+        // const profitPercentage = Math.floor((profit / details.retailPrice)*100);
+
+        //Changing variant depending on profitability
+        const Cardvariant = (profit > 0 ? 'pos' : 'neg');
+        // const progressVariant = (profit > 0 ? 'success' : 'dark');
+
+        return (
+            `
+            <div class="card">
+                <img
+                    width="80%"
+                    height="50%"
+                    src="${details.thumbnail_url}"
+                />
+                <p>Retail cost: ${details.retailPrice || "Not provided"} <br />
+                Highest current bid: ${details.highestBid || "Not provided"} <br />
+                Estimated costs: ${cost} <br />
+                Estimated returns: ${profit} <br />
+                </p>
+            <a href="${details.url}">Go to</a>
+            </div>
+            `
+        )
+    }
+
     // Attempt to get response headers
     var req = new XMLHttpRequest();
     req.open('GET', document.location, false);
@@ -52,9 +101,29 @@
         for (product of products) {
             console.log(product);
         }
-        document.getElementById('products').innerHTML = `<b> ${products[0].name} </b>`;
+        document.getElementById('products').innerHTML = products.map(product => {
+            return createCard(product);
+        });
+        //`<b> ${products[0].name} </b>`;
     }
 </script>
+
+<!-- <div class="card">
+    <b>Jordan 1 Retro High Dark Mocha</b>
+    <img 
+        width="80%"
+        height="50%"    
+        src="https://stockx.imgix.net/images/Air-Jordan-1-Retro-High-Dark-Mocha-2-Product.jpg?fit=fill&bg=FFFFFF&w=300&h=214&auto=format,compress&trim=color&q=90&dpr=2&updated_at=1608736454"
+    />
+    <p>Retail cost: $350 <br />
+    Estimated sale price: $700 <br />
+    Estimated total additional costs: $210 <br />
+    Profit: $140 <br />
+    </p>
+
+    <button>Go to</button>
+    
+</div> -->
 
 </body>
 </html>
