@@ -1,3 +1,18 @@
+/* Variables */
+:root {
+    --input-background-colour: rgb(209, 212, 255);
+    --input-border: 1px solid #85b2ff;
+    --input-height: 35px;
+    --input-text-size: 30px;
+    --input-transition: 500ms;
+
+
+    --input-background-colour-focus: rgb(21, 37, 255);
+    --input-border-focus: 1px solid rgb(21, 37, 255);
+}
+
+/* Page */
+
 body {
     display: flex;
 
@@ -17,7 +32,59 @@ body {
     text-decoration: underline overline;
 }
 
+/* Inputs table */
+
+.inputs-row {
+    display: flex;
+    gap: 200px;
+
+    align-items: center;
+}
+
+.input-group {
+    border-radius: 10px;
+    background-color: var(--input-background-colour);
+
+    transition: var(--input-transition);
+}
+
+.input-group:focus-within {
+    background-color: var(--input-background-colour-focus)
+}
+
+.input-group span {
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 10px 10px;
+}
+
+.input-group:focus-within {
+    color: white;
+}
+
+.input-value {
+    border: var(--input-border);
+    border-radius: 0px 10px 10px 0px;
+    background-color: var(--input-background-colour);
+
+    font-size: 20px;
+    height: var(--input-height);
+    width: 50px;
+
+    padding: 0px 10px;
+    appearance: textfield;
+
+    transition: var(--input-transition);
+}
+
+.input-value:focus {
+    border: var(--input-border-focus);
+}
+
 .search-bar {
+    display: block;
+
     background: transparent;
     border: 0;
     font-size: 20px;
@@ -27,7 +94,6 @@ body {
     outline: none !important;
     position: relative;
     border-bottom: solid 3px black;
-    display: block;
 }
 
 .search-bar:focus {

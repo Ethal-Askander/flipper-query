@@ -11,9 +11,19 @@
     <h1 class="title">Flipper Query</h1>
 </div>
 
-<div>
+<div class="inputs-row">
     <form action="/search" method="GET">
-        <input class="search-bar" type="text" name="q" id="search" placeholder="Jordan 1..." />
+        <input id="search" class="search-bar" type="text" name="q" placeholder="Jordan 1..." />
+    </form>
+
+    <form class="input-group">
+        <span>Shipping</span>
+        <input id="shipping-cost" class="input-value" type="number" name="s" placeholder="30" min="0" max="1000"/>
+    </form>
+
+    <form class="input-group">
+        <span>Commission</span>
+        <input id="commission" class="input-value" type="number" name="c" placeholder="0.12" min="0" max="1"/>
     </form>
 </div>
 
