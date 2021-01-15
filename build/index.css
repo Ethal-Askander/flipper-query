@@ -82,6 +82,17 @@ body {
     border: var(--input-border-focus);
 }
 
+.submit-button {
+    height: var(--input-height);
+    border-radius: 10px;
+    background-color: var(--input-background-colour);
+
+    font-size: 20px;
+    font-weight: bold;
+
+    transition: all 500ms;
+}
+
 .search-bar {
     display: block;
 
@@ -97,7 +108,7 @@ body {
 }
 
 .search-bar:focus {
-    border-bottom: solid 3px blue;
+    border-bottom: solid 3px var(--input-background-colour-focus);
     transition: all 200ms linear;
 }
 

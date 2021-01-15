@@ -12,18 +12,20 @@
 </div>
 
 <div class="inputs-row">
-    <form action="/search" method="GET">
+    <form class="inputs-row" action="/search" method="GET">
         <input id="search" class="search-bar" type="text" name="q" placeholder="Jordan 1..." />
-    </form>
 
-    <form class="input-group">
-        <span>Shipping</span>
-        <input id="shipping-cost" class="input-value" type="number" name="s" placeholder="30" min="0" max="1000"/>
-    </form>
+        <div class="input-group">
+            <span>Shipping</span>
+            <input id="shipping-cost" class="input-value" type="number" name="s" placeholder="30" min="0" max="1000" step="0.01"/>
+        </div>
 
-    <form class="input-group">
-        <span>Commission</span>
-        <input id="commission" class="input-value" type="number" name="c" placeholder="0.12" min="0" max="1"/>
+        <div class="input-group">
+            <span>Commission</span>
+            <input id="commission" class="input-value" type="number" name="c" placeholder="0.12" min="0" max="1" step="0.01"/>
+        </div>
+
+        <input id="submit-button" class="submit-button" type="submit" value="Search"/>
     </form>
 </div>
 
