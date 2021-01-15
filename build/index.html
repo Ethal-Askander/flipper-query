@@ -32,10 +32,18 @@
 <div id="container" class="card-container" />
 
 <script>
-    const shipping = 30;
-    const commission = 0.12;
+    // Get search parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q') || "";
+    const shipping = urlParams.get('s') ? parseFloat(urlParams.get('s')) : 30;
+    const commission = urlParams.get('c') ? parseFloat(urlParams.get('c')) : 0.12;
 
-        /**
+    // Setup values
+    document.getElementById('search').value = urlParams.get('q') ? query : "";
+    document.getElementById('shipping-cost').value = urlParams.get('s') ? shipping : "";
+    document.getElementById('commission').value = urlParams.get('c') ? commission : "";
+
+    /**
      * @param url: URL to open.
      * Opens the given url.
      */
