@@ -84,4 +84,4 @@ app.listen(port, () => console.log(`Listening on port ${port}... open with http:
 
 // Open new window
 const open = require('open');
-// open(`http://localhost:${port}`)
+open(`http://localhost:${port}`);
