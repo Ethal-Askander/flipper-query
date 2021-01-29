@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();          // For API
 const cors = require('cors');   // To enable Cross-origin resource sharing (allows react to call this)
 const path = require('path');   // For getting local files
+const convertCurrency = require('nodejs-currency-converter'); // For currency conversion.
 
 app.use(express.static(path.join(__dirname, 'build'))); // Links html and css
 app.use(cors())
@@ -46,7 +47,11 @@ app.get('/', function (req, res) {
 
 // Ping server
 app.get('/ping', function (req, res) {
-    return res.send('pong');
+    const conv = convertCurrency(1, 'USD', 'AUD');
+    conv.then(res => {
+        return res.send(res);
+    })
+    // return res.send('pong');
 });
 
 // Obtaining query request
@@ -84,4 +89,4 @@ app.listen(port, () => console.log(`Listening on port ${port}... open with http:
 
 // Open new window
 const open = require('open');
-open(`http://localhost:${port}`);
+// open(`http://localhost:${port}`);

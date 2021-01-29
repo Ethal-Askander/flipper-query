@@ -2,7 +2,7 @@
 :root {
     --input-background-colour: rgb(209, 212, 255);
     --input-border: 1px solid #85b2ff;
-    --input-height: 35px;
+    --input-height: 43px;
     --input-text-size: 30px;
     --input-transition: 500ms;
 
@@ -36,12 +36,15 @@ body {
 
 .inputs-row {
     display: flex;
-    gap: 200px;
+    gap: 100px;
 
+    width: 1400px;
     align-items: center;
+    justify-content: center;
 }
 
 .input-group {
+    display: flex;
     border-radius: 10px;
     background-color: var(--input-background-colour);
 
@@ -80,6 +83,17 @@ body {
 
 .input-value:focus {
     border: var(--input-border-focus);
+}
+
+.currency-selector {
+    height: var(--input-height);
+    width: 75px;
+
+    border-radius: 2px;
+    background-color: var(--input-background-colour);
+    
+    font-size: 20px;
+    border: none;
 }
 
 .submit-button {
