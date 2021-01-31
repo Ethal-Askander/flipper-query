@@ -63,37 +63,44 @@ app.get('/', function (req, res) {
 
 // Ping server
 app.get('/ping', function (req, res) {
-    // exchangeRate('USD', 'AUD')
-    //     .then(out => {
-    //         console.log(out);
-    //         return res.status(200).send(out + '');
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-
     res.status(200).send('pong!');
 });
 
 // Obtaining query request
 app.get('/search', function (req, res) {
     // Check search query parameter
-    if (!req.query.q) {
+    if (!req.query.query) {
         // 400 = Bad Request
         return res.status(400).send('Requires query value');
     }
 
     // Conduct search
-    const query = req.query.q;
-    const number = req.query.n;
-    scrapeProducts(query, number).then(out => {
-        res.status(200);
-        // res.send(out);
+    const query = req.query.query;
+    const number = req.query.number;
+    const currency = req.query.currency;
+    scrapeProducts(query, number).then(async out => {
+        // If currency is provided, convert the currencies
+        if (currency) {
+            await exchangeRate('USD', currency)
+                .then(rate => {
+                    out.forEach(shoe => {
+                        shoe.retailPrice = Math.round(shoe.retailPrice*rate * 100 + Number.EPSILON) / 100;
+                        shoe.highestBid = Math.round(shoe.highestBid*rate * 100 + Number.EPSILON) / 100;
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    throw new Error('Unable to convert to currency');
+                });
+        }
+
         const options = {
             headers: {
                 'products': JSON.stringify(out)
             }
-          };
+        };
+
+        res.status(200);
         res.sendFile(path.join(__dirname, 'build', 'index.html'), options, (err) => {
             res.status(403);
             res.send(err);

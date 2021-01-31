@@ -13,19 +13,19 @@
 
 <div class="inputs-row">
     <form class="inputs-row" action="/search" method="GET">
-        <input id="search" class="search-bar" type="text" name="q" placeholder="Jordan 1..." />
+        <input id="search" class="search-bar" type="text" name="query" placeholder="Jordan 1..." />
 
         <div class="input-group">
             <span>Shipping</span>
-            <input id="shipping-cost" class="input-value" type="number" name="s" placeholder="30" min="0" max="1000" step="0.01"/>
+            <input id="shipping-cost" class="input-value" type="number" name="shipping" placeholder="30" min="0" max="1000" step="0.01"/>
         </div>
 
         <div class="input-group">
             <span>Commission</span>
-            <input id="commission" class="input-value" type="number" name="c" placeholder="0.12" min="0" max="1" step="0.01"/>
+            <input id="commission" class="input-value" type="number" name="commision" placeholder="0.12" min="0" max="1" step="0.01"/>
         </div>
 
-        <select id="currency" class="currency-selector">
+        <select id="currency" class="currency-selector" name="currency">
             <option>USD</option>
             <option>AUD</option>
         </select>
@@ -41,14 +41,15 @@
 <script>
     // Get search parameters
     const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('q') || "";
-    const shipping = urlParams.get('s') ? parseFloat(urlParams.get('s')) : 30;
-    const commission = urlParams.get('c') ? parseFloat(urlParams.get('c')) : 0.12;
+    const query = urlParams.get('query') || "";
+    const shipping = urlParams.get('shipping') ? parseFloat(urlParams.get('shipping')) : 30;
+    const commission = urlParams.get('commision') ? parseFloat(urlParams.get('commision')) : 0.12;
 
     // Setup values
-    document.getElementById('search').value = urlParams.get('q') ? query : "";
-    document.getElementById('shipping-cost').value = urlParams.get('s') ? shipping : "";
-    document.getElementById('commission').value = urlParams.get('c') ? commission : "";
+    document.getElementById('search').value = query;
+    document.getElementById('shipping-cost').value = urlParams.get('shipping') ? shipping : "";
+    document.getElementById('commission').value = urlParams.get('commision') ? commission : "";
+    document.getElementById('currency').value = urlParams.get('currency') || 'USD';
 
     /**
      * @param url: URL to open.
@@ -106,9 +107,6 @@
     if (products) {
         // Testing, to see how to parse and get information from a product.
         products = JSON.parse(products);
-        for (product of products) {
-            console.log(product);
-        }
         document.getElementById('container').innerHTML = products.map(product => {
             return createCard(product);
         });
