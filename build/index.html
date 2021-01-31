@@ -37,6 +37,7 @@
 </div>
 
 <div id="container" class="card-container" />
+<div id="toast" />
 
 <script>
     // Get search parameters
@@ -44,12 +45,32 @@
     const query = urlParams.get('query') || "";
     const shipping = urlParams.get('shipping') ? parseFloat(urlParams.get('shipping')) : 30;
     const commission = urlParams.get('commision') ? parseFloat(urlParams.get('commision')) : 0.12;
+    const currency = urlParams.get('currency') || 'USD';    // USD is the base currency
 
     // Setup values
     document.getElementById('search').value = query;
     document.getElementById('shipping-cost').value = urlParams.get('shipping') ? shipping : "";
     document.getElementById('commission').value = urlParams.get('commision') ? commission : "";
-    document.getElementById('currency').value = urlParams.get('currency') || 'USD';
+    document.getElementById('currency').value = currency;
+
+
+    /**
+     * @param message: message to display in toast
+     * Displays a short message on the bottom of the screen
+    */
+    const toast = (message) => {
+        const toast = document.getElementById('toast');
+        if (toast) {
+            toast.innerHTML = message;
+            toast.className = "show";
+            setTimeout(() => { toast.className = ""; }, 3000);
+        }
+    }
+
+    // Conduct toast if necessary
+    if (currency !== 'USD') {
+        toast('Warning: the values may be off due to currency conversion');
+    }
 
     /**
      * @param url: URL to open.
