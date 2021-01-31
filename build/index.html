@@ -118,7 +118,7 @@
         )
     }
 
-    // Attempt to get response headers
+    // Attempt to get response headers by making another request to the same URL (FIX if possible to not call index.js twice).
     var req = new XMLHttpRequest();
     req.open('GET', document.location, false);
     req.send(null);

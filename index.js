@@ -80,7 +80,7 @@ app.get('/search', function (req, res) {
     const currency = req.query.currency;
     scrapeProducts(query, number).then(async out => {
         // If currency is provided, convert the currencies
-        if (currency) {
+        if (currency && currency !== 'USD') {
             await exchangeRate('USD', currency)
                 .then(rate => {
                     out.forEach(shoe => {
