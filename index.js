@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();          // For API
 const cors = require('cors');   // To enable Cross-origin resource sharing (allows react to call this)
 const path = require('path');   // For getting local files
-//TODO: find package to do currency exchange rates // For currency conversion.
+const axios = require('axios'); // For getting the exchange rate from an external API
 
 app.use(express.static(path.join(__dirname, 'build'))); // Links html and css
 app.use(cors())
@@ -12,6 +12,22 @@ const stockX = new StockXAPI({
     currency: 'AUD'
 });
 const BASE_STOCKX_URL = 'https://stockx.com/'
+
+// For currency conversion
+async function exchangeRate(base, local) {
+    const apiKey = '4b54c0cab5cfad853963';  // API key for the website https://free.currencyconverterapi.com/
+    return await axios.get(`http://free.currencyconverterapi.com/api/v6/convert?q=${base}_${local}&compact=ultra&apiKey=${apiKey}`)
+        .then(res => {
+            // Getting the exchange rate from the returning JSON.
+            const rateKey = Object.keys(res.data);
+            const rate = res.data[rateKey];
+            return rate;
+        })
+        .catch(err => {
+            console.log(err);
+            return 'Something went wrong...';
+        });
+}
 
 // Scrapes StockX and returns items according to search parameter
 async function scrapeProducts(query, number = undefined) {
@@ -47,7 +63,16 @@ app.get('/', function (req, res) {
 
 // Ping server
 app.get('/ping', function (req, res) {
-    return res.send('pong');
+    // exchangeRate('USD', 'AUD')
+    //     .then(out => {
+    //         console.log(out);
+    //         return res.status(200).send(out + '');
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     });
+
+    res.status(200).send('pong!');
 });
 
 // Obtaining query request
