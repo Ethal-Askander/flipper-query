@@ -34,7 +34,7 @@
 
         <div id="custom-exchange" class="input-group">
             <span>Exchange Rate (USD)</span>
-            <input id="exchange" class="input-value" type="number" name="exchange" placeholder="1.35" min="0" step="0.01"/>
+            <input id="exchange" class="input-value" type="number" name="exchange" placeholder="1" min="0" step="0.01"/>
         </div>
 
         <input id="submit-button" class="submit-button" type="submit" value="Search"/>
@@ -65,6 +65,7 @@
     const shipping = urlParams.get('shipping') ? parseFloat(urlParams.get('shipping')) : 30;
     const commission = urlParams.get('commision') ? parseFloat(urlParams.get('commision')) : 0.12;
     const currency = urlParams.get('currency') || 'USD';    // USD is the base currency
+    const exchange = urlParams.get('exchange') ? parseFloat(urlParams.get('exchange')) : undefined;
 
     // Setup values
     document.getElementById('search').value = query;
@@ -72,6 +73,16 @@
     document.getElementById('commission').value = urlParams.get('commision') ? commission : "";
     document.getElementById('currency').value = currency;
 
+
+    // Check if exchange was provided instead of currency
+    if (exchange) {
+        console.log(exchange)
+        // Replace currency selector with custom exchange rate.
+        currencySelector.className = 'remove';
+        const customExchange = document.getElementById('custom-exchange');
+        customExchange.className = 'show input-group';
+        document.getElementById('exchange').value = exchange;
+    }
 
     /**
      * @param message: message to display in toast

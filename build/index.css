@@ -109,13 +109,13 @@ body {
 
 /* Custom exchange rate */
 #custom-exchange {
-    visibility: collapse;
+    display: none;
 
     transition: var(--input-transition);
 }
 
 #custom-exchange.show {
-    visibility: visible;
+    display: flex;
 }
 
 /* Submit button */

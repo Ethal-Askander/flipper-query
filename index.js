@@ -78,9 +78,10 @@ app.get('/search', function (req, res) {
     const query = req.query.query;
     const number = req.query.number;
     const currency = req.query.currency;
+    const exchange = req.query.exchange;
     scrapeProducts(query, number).then(async out => {
         // If currency is provided, convert the currencies
-        if (currency && currency !== 'USD') {
+        if (currency && currency !== 'Custom' && currency !== 'USD') {
             await exchangeRate('USD', currency)
                 .then(rate => {
                     out.forEach(shoe => {
@@ -92,6 +93,11 @@ app.get('/search', function (req, res) {
                     console.log(err);
                     throw new Error('Unable to convert to currency');
                 });
+        } else if (exchange) { // Check if exchange rate was provided
+            out.forEach(shoe => {
+                shoe.retailPrice = Math.round(shoe.retailPrice*exchange * 100 + Number.EPSILON) / 100;
+                shoe.highestBid = Math.round(shoe.highestBid*exchange * 100 + Number.EPSILON) / 100;
+            });
         }
 
         const options = {
