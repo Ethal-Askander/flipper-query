@@ -94,7 +94,31 @@ body {
     
     font-size: 20px;
     border: none;
+
+    transition: all 500ms;
 }
+
+.currency-selector:focus {
+    box-shadow: 0px 2px 2px var(--input-background-colour-focus);
+    border: 1px solid var(--input-background-colour-focus);
+}
+
+.remove {
+    display: none;
+}
+
+/* Custom exchange rate */
+#custom-exchange {
+    visibility: collapse;
+
+    transition: var(--input-transition);
+}
+
+#custom-exchange.show {
+    visibility: visible;
+}
+
+/* Submit button */
 
 .submit-button {
     height: var(--input-height);

@@ -26,9 +26,16 @@
         </div>
 
         <select id="currency" class="currency-selector" name="currency">
+            <optgroup label="Currencies" />
             <option>USD</option>
             <option>AUD</option>
+            <option>Custom</option>
         </select>
+
+        <div id="custom-exchange" class="input-group">
+            <span>Exchange Rate (USD)</span>
+            <input id="exchange" class="input-value" type="number" name="exchange" placeholder="1.35" min="0" step="0.01"/>
+        </div>
 
         <input id="submit-button" class="submit-button" type="submit" value="Search"/>
     </form>
@@ -40,6 +47,18 @@
 <div id="toast" />
 
 <script>
+    // Determine if a custome exchange rate is selected and act appropriately.
+    const currencySelector = document.getElementById('currency');
+    currencySelector.addEventListener("change", e => {
+        // Check if 'Custom' has been selected
+        if (e.target.value === 'Custom') {
+            // Replace currency selector with custom exchange rate.
+            currencySelector.className = 'remove';
+            const customExchange = document.getElementById('custom-exchange');
+            customExchange.className = 'show input-group';
+        }
+    });
+
     // Get search parameters
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('query') || "";
