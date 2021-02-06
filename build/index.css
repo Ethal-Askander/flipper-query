@@ -152,7 +152,8 @@ body {
 
 /* Product Cards */
 .card {
-    height: 300px;
+    min-height: 300px;
+    height: min-content;
     width: 250px;
     position: relative;
 
@@ -193,6 +194,12 @@ body {
     margin-left: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+/* Progress bar */
+progress {
+    position: absolute;
+    appearance: none;
 }
 
 /* Toast that appears at the bottom of the screen */
