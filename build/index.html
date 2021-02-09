@@ -131,7 +131,7 @@
 
         return (
             `
-            <div class="card ${profit > 0 ? "pos" : "neg"}">
+            <div class="card ${Cardvariant}">
                 <strong>${details.name}</strong>
                 <img
                     width="80%"
@@ -142,7 +142,7 @@
                 Highest current bid: ${details.highestBid || "Not provided"} <br />
                 Estimated costs: ${cost} <br />
                 Estimated returns: ${profit} <br />
-                <progress value="${profitPercentage}" max="100"> ${profitPercentage}% </progress>
+                <div class="profit-bar-${Cardvariant}" style="width:${profitPercentage}%">${profitPercentage}%</div>
                 </p>
             <a href="${details.url}">Go to</a>
             </div>
