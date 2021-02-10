@@ -66,6 +66,13 @@ body {
     color: white;
 }
 
+/* Removing arrows/spinners from number input */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .input-value {
     border: var(--input-border);
     border-radius: 0px 10px 10px 0px;
@@ -77,6 +84,8 @@ body {
 
     padding: 0px 10px;
     appearance: textfield;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
 
     transition: var(--input-transition);
 }

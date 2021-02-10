@@ -50,6 +50,10 @@
     // Determine if a custome exchange rate is selected and act appropriately.
     const currencySelector = document.getElementById('currency');
     currencySelector.addEventListener("change", e => {
+        // Inform user that anything other than USD may be off
+        if (e.target.value !== 'USD')
+            toast('Warning: the values may be off due to currency conversion');
+        
         // Check if 'Custom' has been selected
         if (e.target.value === 'Custom') {
             // Replace currency selector with custom exchange rate.
@@ -97,11 +101,6 @@
         }
     }
 
-    // Conduct toast if necessary
-    if (currency !== 'USD') {
-        toast('Warning: the values may be off due to currency conversion');
-    }
-
     /**
      * @param url: URL to open.
      * Opens the given url.
@@ -142,7 +141,11 @@
                 Highest current bid: ${details.highestBid || "Not provided"} <br />
                 Estimated costs: ${cost} <br />
                 Estimated returns: ${profit} <br />
-                <div class="profit-bar-${Cardvariant}" style="width:${profitPercentage}%">${profitPercentage}%</div>
+                ${profitPercentage ? 
+                    `<div class="profit-bar-${Cardvariant}" style="width:${Math.abs(profitPercentage)}%">${profitPercentage}%</div>`
+                    :
+                    `<div>Missing information required for visual</div>`
+                }
                 </p>
             <a href="${details.url}">Go to</a>
             </div>
