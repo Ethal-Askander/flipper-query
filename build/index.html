@@ -137,10 +137,14 @@
                     height="50%"
                     src="${details.thumbnail_url}"
                 />
-                <p>Retail cost: ${details.retailPrice || "Not provided"} <br />
-                Highest current bid: ${details.highestBid || "Not provided"} <br />
-                Estimated costs: ${cost} <br />
-                Estimated returns: ${profit} <br />
+                <p>Retail cost: $${details.retailPrice || "Not provided"} <br />
+                Highest current bid: $${details.highestBid || "Not provided"} <br />
+                Estimated costs: $${cost} <br />
+                Estimated returns: ${profit > 0 ?
+                    `<b style="color:blue">$${profit}</b>`
+                    :
+                    `<b style="color:red">-$${Math.abs(profit)}</b>`
+                } <br />
                 ${profitPercentage ? 
                     `<div class="profit-bar-${Cardvariant}" style="width:${Math.abs(profitPercentage)}%">${profitPercentage}%</div>`
                     :
