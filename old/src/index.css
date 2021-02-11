@@ -1,0 +1,129 @@
+/* Whole page */
+body {
+  align-items: center;
+  display: flex;
+  font-family: 'Inter UI', sans-serif;
+  font-size: 14px;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Title */
+.title > h1 {
+  display: flex;
+  position: relative;
+  font-size: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: underline overline;
+}
+
+.title {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contents table */
+.contents-table {
+  display: flex;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 1416px;
+}
+
+.contents-table *:first-child {
+  float: left;
+}
+
+.contents-table *:nth-child(2) {
+  float: left;
+  margin-left: 20px;
+}
+
+.contents-table *:nth-child(3) {
+  float: left;
+  margin-left: 20px;
+}
+
+.contents-table *:last-child {
+  float: right;
+  margin-left: auto;
+}
+
+/* Search bar */
+input {
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  width: 200px;
+  height: 30px;
+  /* outline: none !important;
+  position: relative;
+  border-bottom: solid black;
+  display: block; */
+}
+
+form {
+  display: flex;
+  align-items: center;
+  min-width: 246px;
+  height: 50px;
+  background-color: whitesmoke;
+  box-shadow: 1px 1px 2px black;
+  border-radius: 5px;
+}
+
+.icon {
+  background-color: black;
+  border: 0;
+  display: flex;
+  width: 22px;
+  height: 22px;
+  margin: 0.8em;
+  border-radius: 50%;
+}
+
+.icon_animated {
+  background-color: black;
+  border: 0;
+  display: flex;
+  width: 22px;
+  height: 22px;
+  margin: 0.8em;
+  border-radius: 50%;
+  animation: loading 2s ease-out infinite;
+}
+
+@keyframes loading {
+  0%, 50%, 100% {
+		transform: scale(1);
+		filter: blur(0px);
+	}
+	25% {
+		transform: scale(0.6);
+    filter: blur(3px);
+    background-color: red;
+	}
+	75% {
+		filter: blur(3px);
+    transform: scale(1.4);
+    background-color: blue;
+	}
+}
+
+/* Shoe box */
+.shoe-box {
+  background-color: whitesmoke;
+  filter: drop-shadow(0px 12px 42px rgba(0, 0, 0, 0.161));
+  border: 0;
+  display: flex;
+  width: 1516px;
+  height: 768px;
+  border-radius: 2%;
+
+  align-items: right;
+  justify-content: right;
+}
