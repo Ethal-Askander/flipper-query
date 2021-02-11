@@ -217,6 +217,7 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: blue;
     color: white;
 
+    font-weight: 550;
     text-align: center;
 }
 
@@ -231,6 +232,7 @@ input[type=number]::-webkit-inner-spin-button {
     background-color: red;
     color: white;
 
+    font-weight: 550;
     text-align: center;
 }
 
