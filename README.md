@@ -1,6 +1,8 @@
 # Flipper-Query
 Flipper-Query is an api that allows the user to obtain StockX resale product information.
 
+![Flipper Query](./images/showcase.png)
+
 ### To install everything
 - npm i
 
