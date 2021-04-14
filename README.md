@@ -1,5 +1,7 @@
 # Flipper-Query
-Flipper-Query is an api that allows the user to obtain StockX resale product information.
+Flipper-Query is a web application that allows the user to obtain StockX resale product information.
+
+Please note that due to the blocking of the scraper by StockX the web application no longer works.
 
 ![Flipper Query](./images/showcase.png)
 
